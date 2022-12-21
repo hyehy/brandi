@@ -22,6 +22,8 @@ class SearchPage extends GetView<SearchController> {
                     border: Border.all(color: Colors.black12),
                     borderRadius: BorderRadius.circular(10.0)),
                 child: TextFormField(
+                  controller: controller.searchTxt,
+                  focusNode: controller.searchNode,
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     errorBorder: UnderlineInputBorder(
@@ -43,10 +45,10 @@ class SearchPage extends GetView<SearchController> {
                         },
                         child: const Icon(Icons.search, color: Colors.black)),
                   ),
-                  // controller: controller.searchTxt,
-                  // focusNode: controller.searchNode,
                   onChanged: (text) {
-                    // controller.searchEvent(text);
+                    controller.getImageList(
+                        text, controller.sort.value, null, null);
+                    print(text);
                   },
                 ),
               ),

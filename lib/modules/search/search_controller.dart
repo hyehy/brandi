@@ -8,8 +8,6 @@ class SearchController extends GetxController {
   var banUserList = <Meta>[].obs;
   var searchTxt = TextEditingController();
   var searchNode = FocusNode();
-  var searchTxt1 = "".obs;
-  var tempTxt = "".obs;
   final api = Get.find<ApiService>();
   var imageList = <Documents>[].obs;
   var sort = Sort.ACCURACY.obs;
@@ -30,20 +28,26 @@ class SearchController extends GetxController {
   }
 
   searchEvent(String txt) {
-    Timer(const Duration(milliseconds: 500), () {
-      tempTxt.value = txt;
-      if (tempTxt == searchTxt.text) {
-        searchTxt1.value = txt;
-        // mapController.searchTxt.value = txt;
-      }
-    });
+    searchTxt.text = txt;
+    print(searchTxt.text);
   }
 
-  resetSearchTxt() {
-    searchTxt1.value = "";
-    searchTxt.text = "";
-    // mapController.searchTxt.value = "";
-  }
+  //
+  // searchEvent(String txt) {
+  //   Timer(const Duration(milliseconds: 1000), () {
+  //     tempTxt.value = txt;
+  //     if (tempTxt == searchTxt.text) {
+  //       searchTxt1.value = txt;
+  //       // mapController.searchTxt.value = txt;
+  //     }
+  //   });
+  // }
+
+  // resetSearchTxt() {
+  //   searchTxt1.value = "";
+  //   searchTxt.text = "";
+  //   // mapController.searchTxt.value = "";
+  // }
 
   Future<void> getImageList(
       String searchTxt, Sort sort, int? page, int? size) async {
