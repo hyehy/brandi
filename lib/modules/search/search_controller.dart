@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../../model/image_model.dart';
 import '../../service/api_service.dart';
@@ -28,7 +29,7 @@ class SearchController extends GetxController {
     super.onClose();
   }
 
-  searchEvent(String txt) {
+  searchEvent(String txt) async {
     Timer(const Duration(milliseconds: 1000), () {
       tempTxt.value = txt;
       if (tempTxt.value == searchTxt.text) {
