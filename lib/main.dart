@@ -1,8 +1,10 @@
+import 'package:brandi/modules/search/search_controller.dart';
+import 'package:brandi/routes.dart';
 import 'package:brandi/service/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'modules/search/search_page.dart';
+import 'modules/search/widgets/search_page.dart';
 
 void main() {
   Get.putAsync(() => ApiService().init());
@@ -12,34 +14,21 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  final api = Get.find<ApiService>();
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SearchPage(),
-    );
+    return GetMaterialApp(
+        initialRoute: Routes.SEARCH,
+        builder: (context, _) {
+          var child = _!;
+          final navigatorKey = child.key as GlobalKey<NavigatorState>;
+          return child;
+        },
+        getPages: [
+          GetPage(
+            name: Routes.SEARCH,
+            page: () => SearchPage(),
+            binding: BindingsBuilder(() => {Get.put(SearchController())}),
+          )
+        ]);
   }
 }

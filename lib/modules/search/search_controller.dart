@@ -1,28 +1,31 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../model/image_model.dart';
+import '../../service/api_service.dart';
 
 class SearchController extends GetxController {
+  var banUserList = <Meta>[].obs;
   var searchTxt = TextEditingController();
   var searchNode = FocusNode();
   var searchTxt1 = "".obs;
   var tempTxt = "".obs;
+  final api = Get.find<ApiService>();
+  var imageList = <Documents>[].obs;
+  var sort = Sort.ACCURACY.obs;
+  var page = 1.obs;
+  var unit = 3.obs;
 
   @override
   void onInit() {
-    // if (mapController.searchTxt.value != "") {
-    //   searchTxt.text = mapController.searchTxt.value;
-    //   searchEvent(mapController.searchTxt.value);
-    // }
-    // searchData.value = mapController.mapData;
-    // searchNode.requestFocus();
+    getImageList(searchTxt.text, sort.value, page.value, unit.value);
     super.onInit();
   }
 
   @override
   void onClose() {
     // final appController = Get.find<AppController>();
-    // appController.bottomNavigationLogSetScreen();
+    // appController.bottomNavigatiosddssdaadsnLogSetScreen();
     super.onClose();
   }
 
@@ -41,158 +44,34 @@ class SearchController extends GetxController {
     searchTxt.text = "";
     // mapController.searchTxt.value = "";
   }
-  //
-  // getSearchData(BuildContext context) {
-  //   var returnData = searchData.where((e) {
-  //     return (e?.locationName.toString().replaceAll(" ", "") ?? '')
-  //         .contains(searchTxt1.value.replaceAll(" ", "")) ||
-  //         (e?.categoryName.toString().replaceAll(" ", "") ?? '')
-  //             .contains(searchTxt1.value.replaceAll(" ", "")) ||
-  //         (e?.address1_en.toString().replaceAll(" ", "") ?? '')
-  //             .contains(searchTxt1.value.replaceAll(" ", ""))||
-  //         (e?.address1_ko.toString().replaceAll(" ", "") ?? '')
-  //             .contains(searchTxt1.value.replaceAll(" ", ""))||
-  //         (e?.address2_en.toString().replaceAll(" ", "") ?? '')
-  //             .contains(searchTxt1.value.replaceAll(" ", ""))||
-  //         (e?.address2_ko.toString().replaceAll(" ", "") ?? '')
-  //             .contains(searchTxt1.value.replaceAll(" ", "")) ;
-  //   });
-  //   return returnData.map((e) {
-  //     return InkWell(
-  //       onTap: () {
-  //         searchNode.unfocus();
-  //         Timer(const Duration(milliseconds: 100), () {
-  //           Get.back(); //
-  //           mapController.selectLocation(
-  //               e?.latitude, e?.longitude as double, e!);
-  //         });
-  //       },
-  //       child: Card(
-  //         elevation: 0.3,
-  //         child: Padding(
-  //           padding: const EdgeInsets.only(top: 8.0, bottom: 8),
-  //           child: ListTile(
-  //             title: Row(
-  //               mainAxisAlignment: MainAxisAlignment.start,
-  //               children: [
-  //                 SvgPicture.asset(
-  //                   'assets/find_us_images/common/mappicker.svg',
-  //                   height: 16,
-  //                 ),
-  //                 const SizedBox(
-  //                   width: CommonGap.xxs,
-  //                 ),
-  //                 Flexible(
-  //                   child: RichText(
-  //                     maxLines: 1,
-  //                     overflow: TextOverflow.ellipsis,
-  //                     strutStyle: const StrutStyle(fontSize: 14.0),
-  //                     text: TextSpan(
-  //                       style: const TextStyle(
-  //                         color: Colors.black,
-  //                         fontSize: 16,
-  //                       ),
-  //                       text: e?.locationName.toString() ?? 'null',
-  //                     ),
-  //                   ),
-  //                 ),
-  //                 const SizedBox(
-  //                   width: CommonGap.xxs,
-  //                 ),
-  //                 Text(
-  //                   e?.categoryName.toString() ?? 'null',
-  //                   style: const TextStyle(
-  //                       color: Colors.grey,
-  //                       fontFamily: 'SF-Pro-Regular',
-  //                       fontSize: 10),
-  //                 ),
-  //               ],
-  //             ),
-  //             subtitle: Column(
-  //               children: [
-  //                 const SizedBox(
-  //                   height: CommonGap.xs,
-  //                 ),
-  //                 Column(
-  //                   children: [
-  //                     Align(
-  //                       alignment: Alignment.centerLeft,
-  //                       child: Row(
-  //                         children: [
-  //                           Container(
-  //                             decoration: BoxDecoration(
-  //                                 borderRadius: BorderRadius.circular(5),
-  //                                 border: e?.isOpen == 1
-  //                                     ? Border.all(color: Colors.lightGreen)
-  //                                     : Border.all(color: Colors.redAccent)),
-  //                             child: Padding(
-  //                               padding: const EdgeInsets.all(CommonGap.xxxxs),
-  //                               child: Text(e?.isOpen == 1 ? '영업중'.tr : '마감'.tr,
-  //                                   style: e?.isOpen == 1
-  //                                       ? const TextStyle(
-  //                                       color: Colors.lightGreen,
-  //                                       fontFamily: 'SF-Pro-Regular',
-  //                                       fontSize: 12)
-  //                                       : const TextStyle(
-  //                                       color: Colors.redAccent,
-  //                                       fontFamily: 'SF-Pro-Regular',
-  //                                       fontSize: 12)),
-  //                             ),
-  //                           ),
-  //                           const SizedBox(
-  //                             width: CommonGap.xxs,
-  //                           ),
-  //                           Text(
-  //                             e?.distance.toString() ?? 'null',
-  //                             style: const TextStyle(
-  //                                 color: Colors.redAccent,
-  //                                 fontFamily: 'SF-Pro-Regular',
-  //                                 fontSize: 14),
-  //                           ),
-  //                         ],
-  //                       ),
-  //                     ),
-  //                     const SizedBox(
-  //                       height: CommonGap.xs,
-  //                     ),
-  //                     Align(
-  //                       alignment: Alignment.centerLeft,
-  //                       child: RichText(
-  //                         overflow: TextOverflow.ellipsis,
-  //                         strutStyle: const StrutStyle(fontSize: 14.0),
-  //                         text: TextSpan(
-  //                           style: const TextStyle(
-  //                             color: Colors.grey,
-  //                             fontSize: 12,
-  //                           ),
-  //                           text: e?.address1_en.toString() ?? 'null',
-  //                         ),
-  //                       ),
-  //                     ),
-  //                   ],
-  //                 ),
-  //                 const SizedBox(
-  //                   height: CommonGap.xs,
-  //                 ),
-  //                 Row(
-  //                   children: [
-  //                     Text(
-  //                       e?.locationPhone.toString() ?? 'null',
-  //                       style: const TextStyle(
-  //                         // fontWeight: FontWeight.bold,
-  //                           color: Colors.blueAccent,
-  //                           fontFamily: 'SF-Pro-Semibold',
-  //                           fontSize: 14),
-  //                     ),
-  //                   ],
-  //                 ),
-  //               ],
-  //             ),
-  //             isThreeLine: true,
-  //           ),
-  //         ),
-  //       ),
-  //     );
-  //   }).toList();
-  // }
+
+  Future<void> getImageList(
+      String searchTxt, Sort sort, int? page, int? size) async {
+    try {
+      final data = {
+        "query": searchTxt,
+        "sort": convertSort(sort),
+        "page": page ?? 1,
+        "size": size ?? 30
+      };
+      final res =
+          await api.getWithHeader('/v2/search/image', queryParameters: data);
+      print(res);
+      ImageModel imageModel = ImageModel.fromJson(res.data);
+      imageList.value = [...imageModel.documents!.map((e) => e).toList()];
+    } catch (e) {
+      print(e);
+    }
+  }
+}
+
+enum Sort { ACCURACY, RECENCY }
+
+String convertSort(Sort sort) {
+  switch (sort) {
+    case Sort.ACCURACY:
+      return 'accuracy';
+    case Sort.RECENCY:
+      return 'recency';
+  }
 }

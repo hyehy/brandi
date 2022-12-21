@@ -3,6 +3,7 @@ import 'package:brandi/service/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'serach_result.dart';
 
 class SearchPage extends GetView<SearchController> {
   final api = Get.find<ApiService>();
@@ -38,7 +39,7 @@ class SearchPage extends GetView<SearchController> {
                     ),
                     suffixIcon: InkWell(
                         onTap: () {
-                          api.getJSONData();
+                          // controller.getImageList();
                         },
                         child: const Icon(Icons.search, color: Colors.black)),
                   ),
@@ -50,6 +51,7 @@ class SearchPage extends GetView<SearchController> {
                 ),
               ),
             ),
+            SerachResult(),
           ],
         ),
       ),
