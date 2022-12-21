@@ -6,13 +6,14 @@ import '../../service/api_service.dart';
 
 class SearchController extends GetxController {
   var banUserList = <Meta>[].obs;
-  var searchTxt = TextEditingController();
   var searchNode = FocusNode();
+  var searchTxt = TextEditingController();
+  var tempTxt = "".obs;
   final api = Get.find<ApiService>();
   var imageList = <Documents>[].obs;
   var sort = Sort.ACCURACY.obs;
   var page = 1.obs;
-  var unit = 3.obs;
+  var unit = 30.obs;
 
   @override
   void onInit() {
@@ -28,26 +29,13 @@ class SearchController extends GetxController {
   }
 
   searchEvent(String txt) {
-    searchTxt.text = txt;
-    print(searchTxt.text);
+    Timer(const Duration(milliseconds: 1000), () {
+      tempTxt.value = txt;
+      if (tempTxt.value == searchTxt.text) {
+        getImageList(txt, Sort.ACCURACY, 1, unit.value);
+      }
+    });
   }
-
-  //
-  // searchEvent(String txt) {
-  //   Timer(const Duration(milliseconds: 1000), () {
-  //     tempTxt.value = txt;
-  //     if (tempTxt == searchTxt.text) {
-  //       searchTxt1.value = txt;
-  //       // mapController.searchTxt.value = txt;
-  //     }
-  //   });
-  // }
-
-  // resetSearchTxt() {
-  //   searchTxt1.value = "";
-  //   searchTxt.text = "";
-  //   // mapController.searchTxt.value = "";
-  // }
 
   Future<void> getImageList(
       String searchTxt, Sort sort, int? page, int? size) async {
