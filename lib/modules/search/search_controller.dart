@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../../model/image_model.dart';
 import '../../service/api_service.dart';
@@ -8,17 +7,19 @@ import '../../service/api_service.dart';
 class SearchController extends GetxController {
   var banUserList = <Meta>[].obs;
   var searchNode = FocusNode();
-  var searchTxt = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+  final TextEditingController searchTxt =
+      TextEditingController.fromValue(const TextEditingValue(text: '브랜디'));
   var tempTxt = "".obs;
   final api = Get.find<ApiService>();
   var imageList = <Documents>[].obs;
   var sort = Sort.ACCURACY.obs;
-  var page = 1.obs;
-  var unit = 30.obs;
+  var page = 1;
+  var unit = 30;
 
   @override
   void onInit() {
-    getImageList(searchTxt.text, sort.value, page.value, unit.value);
+    getImageList(searchTxt.text, sort.value, page, unit);
     super.onInit();
   }
 
@@ -29,11 +30,16 @@ class SearchController extends GetxController {
     super.onClose();
   }
 
-  searchEvent(String txt) async {
-    Timer(const Duration(milliseconds: 1000), () {
+  searchEvent(String txt) {
+    if (!formKey.currentState!.validate()) {
+      imageList.value = [];
+      return;
+    }
+    Timer(const Duration(milliseconds: 1000), () async {
       tempTxt.value = txt;
       if (tempTxt.value == searchTxt.text) {
-        getImageList(txt, Sort.ACCURACY, 1, unit.value);
+        page = 1;
+        await getImageList(txt, Sort.ACCURACY, page, unit);
       }
     });
   }
@@ -51,7 +57,14 @@ class SearchController extends GetxController {
           await api.getWithHeader('/v2/search/image', queryParameters: data);
       print(res);
       ImageModel imageModel = ImageModel.fromJson(res.data);
-      imageList.value = [...imageModel.documents!.map((e) => e).toList()];
+      if (page == 1) {
+        imageList.value = [...imageModel.documents!.map((e) => e).toList()];
+      } else {
+        imageList.value = [
+          ...imageList.value,
+          ...imageModel.documents!.map((e) => e).toList()
+        ];
+      }
     } catch (e) {
       print(e);
     }
