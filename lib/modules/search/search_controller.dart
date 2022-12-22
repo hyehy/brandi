@@ -26,8 +26,6 @@ class SearchController extends GetxController {
 
   @override
   void onClose() {
-    // final appController = Get.find<AppController>();
-    // appController.bottomNavigatiosddssdaadsnLogSetScreen();
     super.onClose();
   }
 

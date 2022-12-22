@@ -5,19 +5,15 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../helper/circle_progress.dart';
+
 class SearchResult extends GetView<SearchController> {
   final api = Get.find<ApiService>();
 
   @override
   Widget build(BuildContext context) {
     return Obx(() => controller.isLoading.value
-        ? Center(
-            child: CircularProgressIndicator(
-              strokeWidth: 10,
-              backgroundColor: Colors.cyanAccent,
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.blueAccent),
-            ),
-          )
+        ? circleProgress()
         : controller.imageList.isEmpty
             ? SearchNoResult()
             : GridView.builder(
@@ -38,7 +34,6 @@ class SearchResult extends GetView<SearchController> {
                   return InkWell(
                     onTap: () {
                       Get.to(() => Scaffold(
-                            // backgroundColor: Colors.black,
                             appBar: AppBar(
                               backgroundColor: Colors.black,
                               leading: IconButton(
