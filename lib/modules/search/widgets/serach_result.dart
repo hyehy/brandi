@@ -56,8 +56,12 @@ class SearchResult extends GetView<SearchController> {
                             ),
                           ));
                     },
-                    child: Image.network(
-                        '${controller.imageList[index].thumbnailUrl}'),
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.all(
+                          Radius.circular(14)),
+                      child: Image.network(
+                          '${controller.imageList[index].thumbnailUrl}'),
+                    ),
                   );
                 },
               ));

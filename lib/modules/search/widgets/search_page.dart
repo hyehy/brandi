@@ -25,27 +25,23 @@ class SearchPage extends GetView<SearchController> {
                 decoration: InputDecoration(
                     counterText: '',
                     enabledBorder: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
                         borderSide: BorderSide(
-                          width: 1,
                           color: Colors.black,
                         )),
                     focusedBorder: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
                         borderSide: BorderSide(
-                          width: 1,
                           color: Colors.black,
                         )),
                     errorBorder: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
                         borderSide: BorderSide(
-                          width: 1,
                           color: Colors.red,
                         )),
                     focusedErrorBorder: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
                       borderSide: BorderSide(
-                        width: 1,
                         color: Colors.red,
                       ),
                     ),
@@ -58,7 +54,6 @@ class SearchPage extends GetView<SearchController> {
                     suffixIcon: const Icon(
                       Icons.search,
                       color: Colors.black,
-                      size: 30,
                     )),
                 validator: (val) {
                   if (val!.length < 2) {
