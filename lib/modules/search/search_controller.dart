@@ -17,11 +17,26 @@ class SearchController extends GetxController {
   var page = 1;
   var unit = 30;
   var isLoading = false.obs;
+  var isEnd = false;
+  ScrollController scrollController = ScrollController();
 
   @override
   void onInit() {
+    print(121);
     getImageList(searchTxt.text, sort.value, page, unit);
+    print(121);
+    scrollController.addListener(_scrollListener);
+    print(121);
     super.onInit();
+  }
+
+  _scrollListener() async {
+    if (scrollController.offset >=
+            scrollController.position.maxScrollExtent - 70 &&
+        !scrollController.position.outOfRange) {
+      ++page;
+      await getImageList(searchTxt.text, Sort.ACCURACY, page, unit);
+    }
   }
 
   @override
@@ -55,7 +70,6 @@ class SearchController extends GetxController {
       };
       final res =
           await api.getWithHeader('/v2/search/image', queryParameters: data);
-      print(res);
       ImageModel imageModel = ImageModel.fromJson(res.data);
       if (page == 1) {
         imageList.value = [...imageModel.documents!.map((e) => e).toList()];
@@ -67,6 +81,7 @@ class SearchController extends GetxController {
       }
     } catch (e) {
       print(e);
+      //TODO: Toast 로 바꾸기
     }
     isLoading.value = false;
   }

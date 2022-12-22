@@ -13,13 +13,14 @@ Widget showImage(context, image, padding) {
       return Column(
         children: [
           SizedBox(
-            height: Get.height / 10,
+            height: Get.height / 15,
           ),
           Center(
             child: CircularProgressIndicator(
               strokeWidth: 10,
               backgroundColor: Colors.cyanAccent,
-              valueColor: const AlwaysStoppedAnimation<Color>(Colors.blueAccent),
+              valueColor:
+                  const AlwaysStoppedAnimation<Color>(Colors.blueAccent),
               value: loadingProgress.expectedTotalBytes != null
                   ? loadingProgress.cumulativeBytesLoaded /
                       loadingProgress.expectedTotalBytes!

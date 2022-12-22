@@ -12,6 +12,7 @@ class SearchPage extends GetView<SearchController> {
     return Scaffold(
         body: SafeArea(
       child: ListView(
+        controller: controller.scrollController,
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         children: [
           Padding(
@@ -63,7 +64,6 @@ class SearchPage extends GetView<SearchController> {
                 },
                 onChanged: (text) {
                   controller.searchEvent(text);
-                  print(text);
                 },
               ),
             ),
