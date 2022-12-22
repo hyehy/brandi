@@ -16,6 +16,7 @@ class SearchController extends GetxController {
   var sort = Sort.ACCURACY.obs;
   var page = 1;
   var unit = 30;
+  var isLoading = false.obs;
 
   @override
   void onInit() {
@@ -46,6 +47,7 @@ class SearchController extends GetxController {
 
   Future<void> getImageList(
       String searchTxt, Sort sort, int? page, int? size) async {
+    isLoading.value = true;
     try {
       final data = {
         "query": searchTxt,
@@ -68,6 +70,7 @@ class SearchController extends GetxController {
     } catch (e) {
       print(e);
     }
+    isLoading.value = false;
   }
 }
 

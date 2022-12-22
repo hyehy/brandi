@@ -10,53 +10,61 @@ class SearchResult extends GetView<SearchController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() =>
-    controller.imageList.isEmpty
-        ? SearchNoResult()
-        : GridView.builder(
-      padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
-      key: PageStorageKey(UniqueKey()),
-      scrollDirection: Axis.vertical,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: controller.imageList.length,
-      //item 개수
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3, //1 개의 행에 보여줄 item 개수
-        mainAxisSpacing: 10, //수평 Padding
-        crossAxisSpacing: 10, //수직 Padding
-      ),
-      itemBuilder: (BuildContext context, int index) {
-        //item 의 반목문 항목 형성
-        return InkWell(
-          onTap: () {
-            Get.to(() =>
-                Scaffold(
-                  // backgroundColor: Colors.black,
-                  appBar: AppBar(
-                    backgroundColor: Colors.black,
-                    leading: IconButton(
-                      onPressed: () {
-                        Get.back();
-                      },
-                      icon: const Icon(Icons.close, color: Colors.white),
-                    ),
-                  ),
-                  body: ListView(
-                    children: [
-                  Image.network(
-                  controller.imageList[index].imageUrl ?? '',
-                    fit: BoxFit.cover,
-                  ),
-                  Text('${controller.imageList[index].displaySitename}'),
-                  ],
+    return Obx(() => controller.isLoading.value
+        ? Center(
+            child: CircularProgressIndicator(
+              strokeWidth: 10,
+              backgroundColor: Colors.cyanAccent,
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.blueAccent),
+            ),
+          )
+        : controller.imageList.isEmpty
+            ? SearchNoResult()
+            : GridView.builder(
+                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                key: PageStorageKey(UniqueKey()),
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: controller.imageList.length,
+                //item 개수
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3, //1 개의 행에 보여줄 item 개수
+                  mainAxisSpacing: 10, //수평 Padding
+                  crossAxisSpacing: 10, //수직 Padding
                 ),
-            ));
-          },
-          child: Image.network(
-              '${controller.imageList[index].thumbnailUrl}'),
-        );
-      },
-    ));
+                itemBuilder: (BuildContext context, int index) {
+                  //item 의 반목문 항목 형성
+                  return InkWell(
+                    onTap: () {
+                      Get.to(() => Scaffold(
+                            // backgroundColor: Colors.black,
+                            appBar: AppBar(
+                              backgroundColor: Colors.black,
+                              leading: IconButton(
+                                onPressed: () {
+                                  Get.back();
+                                },
+                                icon: const Icon(Icons.close,
+                                    color: Colors.white),
+                              ),
+                            ),
+                            body: ListView(
+                              children: [
+                                Image.network(
+                                  controller.imageList[index].imageUrl ?? '',
+                                  fit: BoxFit.cover,
+                                ),
+                                Text(
+                                    '${controller.imageList[index].displaySitename}'),
+                              ],
+                            ),
+                          ));
+                    },
+                    child: Image.network(
+                        '${controller.imageList[index].thumbnailUrl}'),
+                  );
+                },
+              ));
   }
 }
