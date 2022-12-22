@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
@@ -8,12 +9,15 @@ Column circleProgress() {
       SizedBox(
         height: Get.height / 3.5,
       ),
-      const Center(
-        child: SpinKitPumpingHeart(
-          color: Colors.blueAccent,
-          size: 80,
-        ),
-      ),
+      Center(child: SpinKitFadingCircle(
+        itemBuilder: (BuildContext context, int index) {
+          return DecoratedBox(
+            decoration: BoxDecoration(
+              color: index.isEven ? Colors.red : Colors.blueAccent,
+            ),
+          );
+        },
+      )),
     ],
   );
 }
