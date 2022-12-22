@@ -12,7 +12,6 @@ class SearchResult extends GetView<SearchController> {
 
   @override
   Widget build(BuildContext context) {
-    // controller.isLoading.value = true;
     return Obx(() => controller.isLoading.value
         ? circleProgress()
         : controller.imageList.isEmpty

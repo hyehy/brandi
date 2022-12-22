@@ -13,7 +13,7 @@ Widget showImage(context, image, padding) {
       return Column(
         children: [
           SizedBox(
-            height: Get.height / 15,
+            height: Get.height / 10,
           ),
           Center(
             child: CircularProgressIndicator(

@@ -33,8 +33,9 @@ class SearchController extends GetxController {
 
   _scrollListener() async {
     if (scrollController.offset >=
-            scrollController.position.maxScrollExtent - 70 &&
-        !scrollController.position.outOfRange) {
+            scrollController.position.maxScrollExtent - Get.height / 10 &&
+        !scrollController.position.outOfRange &&
+        !isEnd) {
       ++page;
       await getImageList(searchTxt.text, Sort.ACCURACY, page, unit);
     }
@@ -65,6 +66,7 @@ class SearchController extends GetxController {
   Future<void> getImageList(
       String searchTxt, Sort sort, int? page, int? size) async {
     try {
+      if (page == 1) isLoading.value = true;
       final data = {
         "query": searchTxt,
         "sort": convertSort(sort),
@@ -75,7 +77,7 @@ class SearchController extends GetxController {
       final res =
           await api.getWithHeader('/v2/search/image', queryParameters: data);
       ImageModel imageModel = ImageModel.fromJson(res.data);
-
+      isEnd = imageModel.meta?.isEnd ?? true;
       if (page == 1) {
         imageList.value = [...imageModel.documents!.map((e) => e).toList()];
       } else {
@@ -88,6 +90,7 @@ class SearchController extends GetxController {
       Fluttertoast.showToast(msg: '$e');
       print(e);
     }
+    isLoading.value = false;
   }
 }
 
