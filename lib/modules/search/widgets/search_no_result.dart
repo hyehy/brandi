@@ -10,15 +10,16 @@ class SearchNoResult extends GetView<SearchController> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: const [
-        Icon(
+      children: [
+        SizedBox(
+          height: Get.height / 3.5,
+        ),
+        const Icon(
           EvaIcons.fileOutline,
           size: 50,
         ),
-        SizedBox(
-          height: 20,
-        ),
-        Text(
+        SizedBox(height: Get.height / 50),
+        const Text(
           '검색 결과가 없습니다.',
           style: TextStyle(fontWeight: FontWeight.bold),
         )

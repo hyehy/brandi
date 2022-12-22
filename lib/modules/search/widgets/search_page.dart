@@ -22,36 +22,36 @@ class SearchPage extends GetView<SearchController> {
                 maxLength: 10,
                 controller: controller.searchTxt,
                 focusNode: controller.searchNode,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     counterText: '',
-                    enabledBorder: const OutlineInputBorder(
+                    enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         borderSide: BorderSide(
                           color: Colors.black,
                         )),
-                    focusedBorder: const OutlineInputBorder(
+                    focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         borderSide: BorderSide(
                           color: Colors.black,
                         )),
-                    errorBorder: const OutlineInputBorder(
+                    errorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         borderSide: BorderSide(
                           color: Colors.red,
                         )),
-                    focusedErrorBorder: const OutlineInputBorder(
+                    focusedErrorBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       borderSide: BorderSide(
                         color: Colors.red,
                       ),
                     ),
-                    hintText: '검색어를 입력해주세요.'.tr,
-                    hintStyle: const TextStyle(
-                      fontWeight: FontWeight.bold,
+                    hintText: '검색어를 입력해주세요.',
+                    hintStyle: TextStyle(
+                      color: Colors.black,
                       fontSize: 14,
                     ),
-                    contentPadding: const EdgeInsets.all(20.0),
-                    suffixIcon: const Icon(
+                    contentPadding: EdgeInsets.all(20.0),
+                    suffixIcon: Icon(
                       Icons.search,
                       color: Colors.black,
                     )),

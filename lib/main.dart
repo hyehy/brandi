@@ -3,7 +3,6 @@ import 'package:brandi/routes.dart';
 import 'package:brandi/service/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'modules/search/widgets/search_page.dart';
 
 void main() {

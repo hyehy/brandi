@@ -1,12 +1,11 @@
+import 'package:brandi/global_widgets/circle_progress.dart';
+import 'package:brandi/util/date_formatter.dart';
+import 'package:brandi/global_widgets/show_image.dart';
 import 'package:brandi/modules/search/search_controller.dart';
 import 'package:brandi/modules/search/widgets/search_no_result.dart';
 import 'package:brandi/service/api_service.dart';
-import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../helper/circle_progress.dart';
-import '../../../helper/date_formatter.dart';
 
 class SearchResult extends GetView<SearchController> {
   final api = Get.find<ApiService>();
@@ -36,41 +35,50 @@ class SearchResult extends GetView<SearchController> {
                     onTap: () {
                       Get.to(() => Scaffold(
                             appBar: AppBar(
-                              backgroundColor: Colors.black,
+                              backgroundColor: Colors.white,
                               leading: IconButton(
                                 onPressed: () {
                                   Get.back();
                                 },
-                                icon: const Icon(Icons.close,
-                                    color: Colors.white),
+                                icon: const Icon(Icons.navigate_before,
+                                    size: 40, color: Colors.black),
                               ),
                             ),
                             body: ListView(
                               children: [
-                                Image.network(
-                                  controller.imageList[index].imageUrl ?? '',
-                                  fit: BoxFit.cover,
-                                ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                Text(
-                                  '출처: ${controller.imageList[index].displaySitename}',
-                                  textAlign: TextAlign.center,
-                                ),
-                                Text(
-                                  '작성 시간: ${dateFormatter('${controller.imageList[index].datetime}')}',
-                                  textAlign: TextAlign.center,
+                                showImage(
+                                    context,
+                                    controller.imageList[index].imageUrl ?? '',
+                                    20),
+                                Padding(
+                                  padding: const EdgeInsets.all(20),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        '${controller.imageList[index].displaySitename}',
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Text(
+                                        dateFormatter(
+                                            '${controller.imageList[index].datetime}'),
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
                           ));
                     },
                     child: ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(14)),
-                      child: Image.network(
-                          '${controller.imageList[index].thumbnailUrl}'),
-                    ),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(14)),
+                        child: showImage(context,
+                            '${controller.imageList[index].thumbnailUrl}', 0)),
                   );
                 },
               ));
