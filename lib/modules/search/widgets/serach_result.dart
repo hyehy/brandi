@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../helper/circle_progress.dart';
+import '../../../helper/date_formatter.dart';
 
 class SearchResult extends GetView<SearchController> {
   final api = Get.find<ApiService>();
@@ -50,15 +51,23 @@ class SearchResult extends GetView<SearchController> {
                                   controller.imageList[index].imageUrl ?? '',
                                   fit: BoxFit.cover,
                                 ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
                                 Text(
-                                    '${controller.imageList[index].displaySitename}'),
+                                  '출처: ${controller.imageList[index].displaySitename}',
+                                  textAlign: TextAlign.center,
+                                ),
+                                Text(
+                                  '작성 시간: ${dateFormatter('${controller.imageList[index].datetime}')}',
+                                  textAlign: TextAlign.center,
+                                ),
                               ],
                             ),
                           ));
                     },
                     child: ClipRRect(
-                      borderRadius: const BorderRadius.all(
-                          Radius.circular(14)),
+                      borderRadius: const BorderRadius.all(Radius.circular(14)),
                       child: Image.network(
                           '${controller.imageList[index].thumbnailUrl}'),
                     ),

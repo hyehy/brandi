@@ -17,15 +17,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        initialRoute: Routes.SEARCH,
+        initialRoute: Routes.search,
         builder: (context, _) {
           var child = _!;
-          final navigatorKey = child.key as GlobalKey<NavigatorState>;
+          // final navigatorKey = child.key as GlobalKey<NavigatorState>;
           return child;
         },
         getPages: [
           GetPage(
-            name: Routes.SEARCH,
+            name: Routes.search,
             page: () => SearchPage(),
             binding: BindingsBuilder(() => {Get.put(SearchController())}),
           )

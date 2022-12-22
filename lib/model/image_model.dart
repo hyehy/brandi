@@ -15,12 +15,12 @@ class ImageModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.meta != null) {
-      data['meta'] = this.meta!.toJson();
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    if (meta != null) {
+      data['meta'] = meta!.toJson();
     }
-    if (this.documents != null) {
-      data['documents'] = this.documents!.map((v) => v.toJson()).toList();
+    if (documents != null) {
+      data['documents'] = documents!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -40,10 +40,10 @@ class Meta {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['total_count'] = this.totalCount;
-    data['pageable_count'] = this.pageableCount;
-    data['is_end'] = this.isEnd;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['total_count'] = totalCount;
+    data['pageable_count'] = pageableCount;
+    data['is_end'] = isEnd;
     return data;
   }
 }
@@ -60,13 +60,13 @@ class Documents {
 
   Documents(
       {this.collection,
-        this.thumbnailUrl,
-        this.imageUrl,
-        this.width,
-        this.height,
-        this.displaySitename,
-        this.docUrl,
-        this.datetime});
+      this.thumbnailUrl,
+      this.imageUrl,
+      this.width,
+      this.height,
+      this.displaySitename,
+      this.docUrl,
+      this.datetime});
 
   Documents.fromJson(Map<String, dynamic> json) {
     collection = json['collection'];
@@ -80,15 +80,15 @@ class Documents {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['collection'] = this.collection;
-    data['thumbnail_url'] = this.thumbnailUrl;
-    data['image_url'] = this.imageUrl;
-    data['width'] = this.width;
-    data['height'] = this.height;
-    data['display_sitename'] = this.displaySitename;
-    data['doc_url'] = this.docUrl;
-    data['datetime'] = this.datetime;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['collection'] = collection;
+    data['thumbnail_url'] = thumbnailUrl;
+    data['image_url'] = imageUrl;
+    data['width'] = width;
+    data['height'] = height;
+    data['display_sitename'] = displaySitename;
+    data['doc_url'] = docUrl;
+    data['datetime'] = datetime;
     return data;
   }
 }

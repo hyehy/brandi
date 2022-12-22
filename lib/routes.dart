@@ -1,4 +1,4 @@
 abstract class Routes {
-  static const SEARCH = '/search_page';
+  static const search = '/search_page';
 
 }
