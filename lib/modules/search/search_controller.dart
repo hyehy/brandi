@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../../model/image_model.dart';
 import '../../service/api_service.dart';
@@ -50,17 +51,19 @@ class SearchController extends GetxController {
       return;
     }
     Timer(const Duration(milliseconds: 1000), () async {
+      isLoading.value = true;
+
       tempTxt.value = txt;
       if (tempTxt.value == searchTxt.text) {
         page = 1;
         await getImageList(txt, Sort.ACCURACY, page, unit);
       }
+      isLoading.value = false;
     });
   }
 
   Future<void> getImageList(
       String searchTxt, Sort sort, int? page, int? size) async {
-    isLoading.value = true;
     try {
       final data = {
         "query": searchTxt,
@@ -68,9 +71,11 @@ class SearchController extends GetxController {
         "page": page ?? 1,
         "size": size ?? 30
       };
+
       final res =
           await api.getWithHeader('/v2/search/image', queryParameters: data);
       ImageModel imageModel = ImageModel.fromJson(res.data);
+
       if (page == 1) {
         imageList.value = [...imageModel.documents!.map((e) => e).toList()];
       } else {
@@ -80,10 +85,9 @@ class SearchController extends GetxController {
         ];
       }
     } catch (e) {
+      Fluttertoast.showToast(msg: '$e');
       print(e);
-      //TODO: Toast 로 바꾸기
     }
-    isLoading.value = false;
   }
 }
 
