@@ -1,16 +1,12 @@
-# brandi
+## 개발 환경
 
-A new Flutter project.
+[✓] Flutter (Channel stable, 3.3.4, on macOS 11.6.1 20G224 darwin-x64, locale ko-KR)
+[✓] Android toolchain - develop for Android devices (Android SDK version 30.0.3)
+[✓] Xcode - develop for iOS and macOS
+[✓] Chrome - develop for the web
+[✓] Android Studio (version 2021.1)
+[✓] VS Code (version 1.64.1)
+[✓] Connected device (2 available)
 
-## Getting Started
+flutter doctor 명령어로 버전들을 확인할 수 있습니다.
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
