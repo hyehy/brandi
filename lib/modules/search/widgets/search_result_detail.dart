@@ -32,25 +32,24 @@ class SearchResultDetail extends GetView<SearchController> {
               padding: const EdgeInsets.all(20),
               child: Row(
                 children: [
-                  Text(
-                    '${documents.displaySitename}',
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 18),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  const Icon(
-                    Icons.circle,
-                    size: 8,
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    dateFormatter('${documents.datetime}'),
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 18),
+                  Expanded(
+                    child: RichText(
+                      overflow: TextOverflow.ellipsis,
+                      text: TextSpan(
+                        style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold),
+                        children: [
+                          TextSpan(
+                            text: '${documents.displaySitename}\n',
+                          ),
+                          TextSpan(
+                            text: dateFormatter('${documents.datetime}'),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ],
               ),
