@@ -46,33 +46,46 @@ class SearchResult extends GetView<SearchController> {
                                     color: Colors.black),
                               ),
                             ),
-                            body: ListView(
-                              children: [
-                                showImage(
-                                    context,
-                                    controller.imageList[index].imageUrl ?? '',
-                                    20),
-                                Padding(
-                                  padding: const EdgeInsets.all(20),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        '${controller.imageList[index].displaySitename}',
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(
-                                        dateFormatter(
-                                            '${controller.imageList[index].datetime}'),
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
+                            body: SafeArea(
+                              child: ListView(
+                                children: [
+                                  showImage(
+                                      context,
+                                      controller.imageList[index].imageUrl ??
+                                          '',
+                                      20),
+                                  Padding(
+                                    padding: const EdgeInsets.all(20),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          '${controller.imageList[index].displaySitename}',
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18),
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        const Icon(
+                                          Icons.circle,
+                                          size: 8,
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        Text(
+                                          dateFormatter(
+                                              '${controller.imageList[index].datetime}'),
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ));
                     },
