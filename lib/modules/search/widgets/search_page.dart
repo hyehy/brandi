@@ -61,15 +61,6 @@ class SearchPage extends GetView<SearchController> {
                     Icons.search,
                     color: Colors.grey,
                   ),
-                  suffixIcon: InkWell(
-                    onTap: () {
-                      controller.searchTxt.clear();
-                    },
-                    child: const Icon(
-                      EvaIcons.closeCircle,
-                      color: Colors.grey,
-                    ),
-                  ),
                 ),
                 validator: (val) {
                   if (val!.length < 2) {

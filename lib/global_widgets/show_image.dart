@@ -10,7 +10,7 @@ Widget showImage(context, image, padding) {
       if (loadingProgress == null) {
         return child;
       }
-      return Column(
+      return ListView(
         children: [
           SizedBox(
             height: Get.height / 10,
