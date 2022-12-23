@@ -11,6 +11,7 @@ Widget showImage(context, image, padding) {
         return child;
       }
       return ListView(
+        shrinkWrap: true,
         children: [
           SizedBox(
             height: Get.height / 10,
