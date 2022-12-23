@@ -1,10 +1,9 @@
 import 'package:brandi/global_widgets/circle_progress.dart';
-import 'package:brandi/util/date_formatter.dart';
+import 'package:brandi/modules/search/widgets/search_result_detail.dart';
 import 'package:brandi/global_widgets/show_image.dart';
 import 'package:brandi/modules/search/search_controller.dart';
-import 'package:brandi/modules/search/widgets/search_no_result.dart';
+import 'package:brandi/modules/search/widgets/search_not_found_result.dart';
 import 'package:brandi/service/api_service.dart';
-import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,7 +15,7 @@ class SearchResult extends GetView<SearchController> {
     return Obx(() => controller.isLoading.value
         ? circleProgress()
         : controller.imageList.isEmpty
-            ? SearchNoResult()
+            ? SearchNotFoundResult()
             : GridView.builder(
                 padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
                 key: PageStorageKey(UniqueKey()),
@@ -34,60 +33,8 @@ class SearchResult extends GetView<SearchController> {
                   //item 의 반목문 항목 형성
                   return InkWell(
                     onTap: () {
-                      Get.to(() => Scaffold(
-                            appBar: AppBar(
-                              backgroundColor: Colors.white,
-                              elevation: 0.0,
-                              leading: IconButton(
-                                onPressed: () {
-                                  Get.back();
-                                },
-                                icon: const Icon(EvaIcons.arrowheadLeftOutline,
-                                    color: Colors.black),
-                              ),
-                            ),
-                            body: SafeArea(
-                              child: ListView(
-                                children: [
-                                  showImage(
-                                      context,
-                                      controller.imageList[index].imageUrl ??
-                                          '',
-                                      20),
-                                  Padding(
-                                    padding: const EdgeInsets.all(20),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          '${controller.imageList[index].displaySitename}',
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 18),
-                                        ),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-                                        const Icon(
-                                          Icons.circle,
-                                          size: 8,
-                                        ),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-                                        Text(
-                                          dateFormatter(
-                                              '${controller.imageList[index].datetime}'),
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 18),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ));
+                      Get.to(() =>
+                          SearchResultDetail(controller.imageList[index]));
                     },
                     child: ClipRRect(
                         borderRadius:

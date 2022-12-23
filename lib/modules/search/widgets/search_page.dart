@@ -6,6 +6,8 @@ import 'package:hexcolor/hexcolor.dart';
 import 'serach_result.dart';
 
 class SearchPage extends GetView<SearchController> {
+  SearchPage({super.key});
+
   final api = Get.find<ApiService>();
 
   @override
