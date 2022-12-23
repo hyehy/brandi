@@ -10,7 +10,7 @@ class SearchController extends GetxController {
   var searchNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   final TextEditingController searchTxt =
-      TextEditingController.fromValue(const TextEditingValue(text: 'Hi'));
+      TextEditingController.fromValue(const TextEditingValue(text: '안녕하세요'));
   var tempTxt = "".obs;
   final api = Get.find<ApiService>();
   var imageList = <Documents>[].obs;

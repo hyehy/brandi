@@ -14,7 +14,7 @@ Widget showImage(context, image, padding) {
         shrinkWrap: true,
         children: [
           SizedBox(
-            height: Get.height / 10,
+            height: Get.height / 20,
           ),
           Center(
             child: CircularProgressIndicator(

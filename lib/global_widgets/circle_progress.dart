@@ -6,7 +6,7 @@ Column circleProgress() {
   return Column(
     children: [
       SizedBox(
-        height: Get.height / 3.5,
+        height: Get.height / 3,
       ),
       Center(child: SpinKitFadingCircle(
         itemBuilder: (BuildContext context, int index) {

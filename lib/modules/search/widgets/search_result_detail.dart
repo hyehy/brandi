@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SearchResultDetail extends GetView<SearchController> {
-  late Documents documents;
-
   SearchResultDetail(this.documents, {super.key});
+
+  late Documents documents;
 
   @override
   Widget build(BuildContext context) {

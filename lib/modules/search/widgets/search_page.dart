@@ -14,9 +14,7 @@ class SearchPage extends GetView<SearchController> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-      child: ListView(
-        controller: controller.scrollController,
-        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+      child: Column(
         children: [
           Padding(
             padding: const EdgeInsets.all(20),

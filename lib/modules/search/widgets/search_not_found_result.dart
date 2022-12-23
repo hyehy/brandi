@@ -11,7 +11,7 @@ class SearchNotFoundResult extends GetView<SearchController> {
     return Column(
       children: [
         SizedBox(
-          height: Get.height / 3.5,
+          height: Get.height / 3,
         ),
         const Icon(
           EvaIcons.fileOutline,
