@@ -23,11 +23,8 @@ class SearchController extends GetxController {
 
   @override
   void onInit() {
-    print(121);
     getImageList(searchTxt.text, sort.value, page, unit);
-    print(121);
     scrollController.addListener(_scrollListener);
-    print(121);
     super.onInit();
   }
 

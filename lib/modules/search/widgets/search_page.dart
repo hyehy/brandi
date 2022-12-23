@@ -1,7 +1,9 @@
 import 'package:brandi/modules/search/search_controller.dart';
 import 'package:brandi/service/api_service.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'serach_result.dart';
 
 class SearchPage extends GetView<SearchController> {
@@ -23,39 +25,52 @@ class SearchPage extends GetView<SearchController> {
                 maxLength: 10,
                 controller: controller.searchTxt,
                 focusNode: controller.searchNode,
-                decoration: const InputDecoration(
-                    counterText: '',
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        borderSide: BorderSide(
-                          color: Colors.black,
-                        )),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        borderSide: BorderSide(
-                          color: Colors.black,
-                        )),
-                    errorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        borderSide: BorderSide(
-                          color: Colors.red,
-                        )),
-                    focusedErrorBorder: OutlineInputBorder(
+                decoration: InputDecoration(
+                  filled: true,
+                  //<-- SEE HERE
+                  fillColor: HexColor('#ececec'),
+                  counterText: '',
+                  enabledBorder: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                      )),
+                  focusedBorder: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                      )),
+                  errorBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       borderSide: BorderSide(
                         color: Colors.red,
-                      ),
+                      )),
+                  focusedErrorBorder: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    borderSide: BorderSide(
+                      color: Colors.red,
                     ),
-                    hintText: '검색어를 입력해주세요.',
-                    hintStyle: TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
+                  ),
+                  hintText: '검색어를 입력해주세요.',
+                  hintStyle: const TextStyle(
+                    color: Colors.grey,
+                    fontSize: 14,
+                  ),
+                  contentPadding: const EdgeInsets.all(20.0),
+                  prefixIcon: const Icon(
+                    Icons.search,
+                    color: Colors.grey,
+                  ),
+                  suffixIcon: InkWell(
+                    onTap: () {
+                      controller.searchTxt.clear();
+                    },
+                    child: const Icon(
+                      EvaIcons.closeCircle,
+                      color: Colors.grey,
                     ),
-                    contentPadding: EdgeInsets.all(20.0),
-                    suffixIcon: Icon(
-                      Icons.search,
-                      color: Colors.black,
-                    )),
+                  ),
+                ),
                 validator: (val) {
                   if (val!.length < 2) {
                     return '검색어는 2자 이상 입력해주세요.';

@@ -4,6 +4,7 @@ import 'package:brandi/global_widgets/show_image.dart';
 import 'package:brandi/modules/search/search_controller.dart';
 import 'package:brandi/modules/search/widgets/search_no_result.dart';
 import 'package:brandi/service/api_service.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -36,12 +37,13 @@ class SearchResult extends GetView<SearchController> {
                       Get.to(() => Scaffold(
                             appBar: AppBar(
                               backgroundColor: Colors.white,
+                              elevation: 0.0,
                               leading: IconButton(
                                 onPressed: () {
                                   Get.back();
                                 },
-                                icon: const Icon(Icons.navigate_before,
-                                    size: 40, color: Colors.black),
+                                icon: const Icon(EvaIcons.arrowheadLeftOutline,
+                                    color: Colors.black),
                               ),
                             ),
                             body: ListView(
